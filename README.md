@@ -1,4 +1,4 @@
 # web-security
 
 Techstack: Spring Security, React. <br>
-Issue: SSO, AccessToken, RefreshToken, O2auth.
+Issue: SSO AWS Cognito, AccessToken, RefreshToken, O2Auth, HTTP Cookies
