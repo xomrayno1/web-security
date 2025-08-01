@@ -1,0 +1,18 @@
+version: "3"
+networks:
+  ec_network:
+    driver: bridge
+services:
+  mysql:
+    container_name: mysql_server
+    image: 'mysql:8.0'
+    environment:
+      - 'MYSQL_PASSWORD=root'
+      - 'MYSQL_ROOT_PASSWORD=root'
+    ports:
+      - '3308:3306'
+    volumes:
+      - "./volumes/mysql/data:/var/lib/mysql"
+      - "./volumes/mysql/config:/etc/mysql/conf.d"
+    networks:
+      - ec_network
