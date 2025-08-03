@@ -11,27 +11,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Entity
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "role")
-public class Role extends BaseEntity{
+public class Staff extends BaseEntity{
 	
-	private static final long serialVersionUID = 7685191495020701437L;
-	
+	private static final long serialVersionUID = 2689886831999505082L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "role_id")
-	private Long roleId;
+	@Column(name = "staff_id")
+	private Long staffId;
+	
+	@Column(name = "phone")
+	private String phone;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "password")
+	private String password;
 
-	@Column(name = "role_name")
-	private String roleName;
 	
-	@Column(name = "role_code")
-	private String roleCode;
-	
-	@Column(name = "description")
-	private String description;
 }

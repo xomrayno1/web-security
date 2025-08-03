@@ -19,7 +19,7 @@ import com.security.model.RefreshTokenRequest;
 import com.security.model.RefreshTokenResponse;
 import com.security.model.RegisterRequest;
 import com.security.service.AuthenticateService;
-import com.security.service.UsersService;
+import com.security.service.StaffService;
 import com.security.utils.PathUtils;
 import com.security.utils.ResponseUtils;
 
@@ -37,7 +37,7 @@ public class AuthController extends BaseController {
   
 	private final PasswordEncoder encoder;
  
-	private final UsersService usersService;
+	private final StaffService usersService;
 	
 
 	/**

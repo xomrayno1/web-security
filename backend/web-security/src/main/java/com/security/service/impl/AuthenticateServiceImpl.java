@@ -9,13 +9,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.security.config.security.JwtTokenProvider;
-import com.security.entity.Users;
+import com.security.entity.Staff;
 import com.security.exception.ValidateException;
 import com.security.model.APIStatus;
 import com.security.model.JWTBody;
 import com.security.model.JwtLoginResponse;
 import com.security.model.LoginRequest;
-import com.security.repository.UsersRepository;
+import com.security.repository.StaffRepository;
 import com.security.service.AuthenticateService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,17 +26,18 @@ public class AuthenticateServiceImpl implements AuthenticateService{
 
 	private final AuthenticationManager authenticationManager;
 	
-	private final UsersRepository usersRepository;
+	private final StaffRepository usersRepository;
 	
 	private final JwtTokenProvider jwtTokenProvider;
 	
 	@Override
 	public JwtLoginResponse authenticate(LoginRequest loginRequest) {
-		Authentication authentication =  authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+		Authentication authentication =  authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getPhone(), loginRequest.getPassword()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		Users users = usersRepository.findByUsername(loginRequest.getUsername())
+		Staff staff = usersRepository.findByPhone(loginRequest.getPhone())
 				.orElseThrow(() -> new ValidateException(APIStatus.ERR_USERNAME_IS_EXISTS));
 		
 		
@@ -45,17 +46,18 @@ public class AuthenticateServiceImpl implements AuthenticateService{
 				.toList();
 		
 		String accessToken =  jwtTokenProvider.generateTokenWithBody(JWTBody.builder()
-				.userId(users.getId())
-				.username(users.getUsername())
+				.userId(staff.getStaffId())
+				.username(staff.getPhone())
 				.authorities(authorities)
 				.build());
-		String refreshToken = jwtTokenProvider.generateRefreshToken(users.getUsername());
+		
+		String refreshToken = jwtTokenProvider.generateRefreshToken(staff.getPhone());
 
 		return JwtLoginResponse.builder()
 				.accessToken(accessToken)
 				.refreshToken(refreshToken)
 				.authorities(authorities)
-				.userId(users.getId())
+				.staffId(staff.getStaffId())
 				.build();
 	}
 

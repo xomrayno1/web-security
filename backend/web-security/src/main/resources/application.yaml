@@ -1,0 +1,34 @@
+server:
+  port: 8080
+
+spring:
+  profile: dev
+  servlet:
+    multipart:
+      max-file-size: 10000MB
+      max-request-size: 10000MB
+  application:
+    name: web-security
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    
+  datasource:
+    url:  ${CONFIG_SERVER_DB_URL:jdbc:mysql://localhost:3308/web-security}?createDatabaseIfNotExist=true&useUnicode=yes&characterEncoding=UTF-8
+    username: ${CONFIG_SERVER_DB_USERNAME:root}
+    password: ${CONFIG_SERVER_DB_PASSWORD:root}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    open-in-view: false
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none                 
+            
+springdoc:
+  api-docs:
+    path: /swagger-ui.html
+
+
+upload:
+    default-chunk-size: 3145728 #value in bytes

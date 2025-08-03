@@ -120,53 +120,17 @@ public class PathUtils {
 	
 	public static final String SALE_ORDER_CREATE_MOCK = SLASH + "sale_order_create_mock";
 	
-	public static final String SALE_ORDER_UPDATE_STATUS = SLASH + "sale_order_update_status";
+	public static final String SALE_ORDER_CANCEL = SLASH + "cancel";
+	
+	public static final String SALE_ORDER_CONFIRM = SLASH + "confirm";
 	
 	public static final String SALE_ORDER_PAYMENT = SLASH + "sale_order_payment";
 	
 	public static final String SALE_ORDER_CART = SLASH + "sale_order_cart";
 	
 	public static final String SALE_ORDER_BY_CUSTOMER_ID = SLASH + "sale_order_by_customer_id/{customerId}";
-	 
-	// stock  api
-	
-	public static final String STOCK_SERVICE = SLASH + "stock";
-	
-	public static final String STOCK_API = "stock";
-	
-	public static final String STOCK_API_V1 = SLASH + API + SLASH + VERSION_V1 + STOCK_SERVICE + SLASH + STOCK_API;
-	
-	public static final String STOCK_GET_BY_PRODUCT_VARIANT_ID = SLASH + "stock_by_product_variant_id/{product_variant_id}";
-	
-	public static final String STOCK_GET_BY_PRODUCT_ID = SLASH + "stock_by_product_id/{product_id}";
-	
-	// stock trans api
-	public static final String STOCK_TRANS_API = "trans";
-
-	public static final String STOCK_TRANS_API_V1 = STOCK_API_V1 +  SLASH +  STOCK_TRANS_API;
-
-	public static final String STOCK_TRANS_PAGING_SEARCH_SORT_FILTER = SLASH + "stock_trans_paging_search_sort_filter";
-
-	public static final String STOCK_TRANS_GET_BY_ID = SLASH + "stock_trans_by_id/{id}";
-
-	public static final String STOCK_TRANS_CREATE = SLASH + "stock_trans_create";
-
-	public static final String STOCK_TRANS_UPDATE = SLASH + "stock_trans_update";
-
-	public static final String STOCK_TRANS_DELETES = SLASH + "stock_trans_deletes";
-
-	public static final String STOCK_TRANS_GET_ALL = SLASH + "product_get_all";
-	
-	public static final String PRODUCT_INFO = "product_info";
-	
-	public static final String PRODUCT_INFO_EC_API = "product_info_ec";
-
-	public static final String PRODUCT_INFO_API_V1 = SLASH + API + SLASH + VERSION_V1 + SALE_SERVICE + SLASH + PRODUCT_INFO;
-
-	public static final String PRODUCT_INFO_EC_API_V1 = SLASH + API + SLASH + VERSION_V1 + SALE_SERVICE + SLASH + PRODUCT_INFO_EC_API;
-	
-	public static final String PRODUCT_INFO_FIND_BY_TYPE = SLASH + "product_info_find_by_type/{type}";
-	
+	  
+ 
 	// account service
 	public static final String ACCOUNT_SERVICE = "account";
 	
@@ -217,21 +181,7 @@ public class PathUtils {
 	
 	public static final String FILE_GET_MINIO = SLASH + "file_get_minio/{uuid}";
 	
-	
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_API = "customer_shipping_address_ec_api";
-  
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_API_V1 = SLASH + API + SLASH + VERSION_V1 + SALE_SERVICE + SLASH + CUSTOMER_SHIPPING_ADDRESS_EC_API;
-
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_PAGING_SEARCH_SORT_FILTER = SLASH + "customer_shipping_address_paging_search_sort_filter";
-
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_FIND_BY_ID = SLASH + "customer_shipping_address_find_by_id/{id}";
-
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_CREATE = SLASH + "customer_shipping_address_create";
-	
-	public static final String CUSTOMER_SHIPPING_ADDRESS_EC_UPDATE = SLASH + "customer_shipping_address_update";
-
  
-	
 	// user api
 	public static final String USER_API = "users";
 
@@ -240,21 +190,7 @@ public class PathUtils {
 	public static final String USER_FIND_CURRENT_USER = SLASH + "current_user";
 	
 	public static final String USER_FIND_CURRENT_USER_BY_TOKEN = SLASH + "current_user_by_token";
-	
-	
-	public static final String CART_EC_API = "cart_ec_api";
-	  
-	public static final String CART_EC_API_V1 = SLASH + API + SLASH + VERSION_V1 + SALE_SERVICE + SLASH + CART_EC_API;
  
-	public static final String CART_EC_FIND_BY_ID = SLASH + "cart_find_by_id/{id}";
-
-	public static final String CART_EC_CREATE_OR_UPDATE = SLASH + "cart_create_or_update";
-	
-	public static final String CART_EC_GET_ALL = SLASH + "cart_get_all";
-	
-	public static final String CART_EC_DELETE = SLASH + "cart_delete";
-	
-	public static final String CART_EC_MOCK_CREATE_ORDER = SLASH + "mock_create_order";
 	 
 	 
 }

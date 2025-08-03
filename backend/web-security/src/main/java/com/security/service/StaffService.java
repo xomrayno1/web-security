@@ -1,14 +1,14 @@
 package com.security.service;
 
-import com.security.entity.Users;
+import com.security.entity.Staff;
 import com.security.model.RefreshTokenResponse;
 import com.security.model.RegisterRequest;
 
-public interface UsersService{
+public interface StaffService{
 	
-	Users findById(Long id);
+	Staff findById(Long id);
 	
-	Users findByUsername(String name);
+	Staff findByPhone(String phone);
 	
 	RefreshTokenResponse refreshToken(String refreshToken);
 

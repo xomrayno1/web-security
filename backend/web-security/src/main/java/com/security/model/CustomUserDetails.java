@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.security.entity.Users;
+import com.security.entity.Staff;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +22,7 @@ import lombok.Data;
 public class CustomUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1725582319574029188L;
 
-	private Users users;
+	private Staff staff;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -33,12 +33,12 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public String getPassword() {
-		return users.getHashPassword();
+		return staff.getPassword();
 	}
 
 	@Override
 	public String getUsername() {
-		return users.getUsername();
+		return staff.getPhone();
 	}
 
 	@Override

@@ -26,10 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JwtTokenProvider {
 	
-	@Value("${jwt.secret}")
+	@Value("${jwt.access.secret}")
 	private String JWT_SECRET;
 	
-	@Value("${jwt.expiration}")  
+	@Value("${jwt.access.expiration}")  
 	private String JWT_EXPIRATION;
 	
 	@Value("${jwt.refresh.secret}")

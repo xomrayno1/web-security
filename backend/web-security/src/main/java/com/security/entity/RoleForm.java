@@ -1,11 +1,9 @@
 package com.security.entity;
 
-import com.security.model.enums.FormType;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,36 +16,37 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "form")
-public class Form extends BaseEntity {
+@Entity(name = "role_form")
+public class RoleForm  extends BaseEntity{
+ 
+	private static final long serialVersionUID = -3285168499450531982L;
 
-	private static final long serialVersionUID = -1441838590240649903L;
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "form_id")
-	private Long formId;
-
-	@Column(name = "form_code")
-	private String formCode;
-
-	@Column(name = "form_name")
-	private String formName;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_id")
-	private Form parentForm;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "form_type")
-	private FormType formType;
+	@Column(name = "role_form_id")
+	private Long roleFormId;
 	
-	@Column(name = "path")
-	private String path;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "role_id")
+	private Role role;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "form_id")
+	private Form form;
+	
+	@Column(name = "from_date")
+	private LocalDateTime fromDate;
+	
+	@Column(name = "to_date")
+	private LocalDateTime toDate;
+	
+	@Column(name = "is_active")
+	private boolean isActive;
 
 }

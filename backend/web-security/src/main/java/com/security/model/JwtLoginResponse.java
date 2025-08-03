@@ -17,7 +17,6 @@ import lombok.Setter;
 public class JwtLoginResponse {
 	private String accessToken;
 	private String refreshToken;
-	private Long userId;
 	private Long staffId;
 	private List<String> authorities;
 

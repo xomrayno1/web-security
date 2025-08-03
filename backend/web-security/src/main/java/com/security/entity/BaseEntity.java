@@ -15,9 +15,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import lombok.Getter;
@@ -30,11 +27,7 @@ import lombok.Setter;
 public class BaseEntity implements Serializable{
 	
 	private static final long serialVersionUID = -4670949227803604934L;
- 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+ 	
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ACTIVE;
 	
