@@ -38,6 +38,9 @@ public class Control extends BaseEntity{
 	@Column(name = "control_element")
 	private String controlElement;
 	
+	@Column(name = "description")
+	private String description;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_id")
 	private Form form;

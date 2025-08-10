@@ -11,7 +11,7 @@ public class PathUtils {
 
 	public static final String SLASH = "/";
 
-	public static final String HEALTH_CHECK_API = "/healthCheck";
+	public static final String HEALTHY_API = "/healthy";
 
 	public static final String USER_SERVICE = "user-service";
 
@@ -153,7 +153,7 @@ public class PathUtils {
 
 	public static final String CUSTOMER_FIND_ALL = SLASH + "customer_find_all";
 	
-	public static final String AUTH_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + ACCOUNT_SERVICE + SLASH + AUTH_API;
+	public static final String AUTH_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + AUTH_API;
 	
 	public static final String AUTH_LOGIN = SLASH + "login";
 	
@@ -166,6 +166,27 @@ public class PathUtils {
 	public static final String AUTH_GENERATE_HASH_PASSWORD = SLASH + "generate_hash_password/{rawPassword}";
 	
 	public static final String AUTH_REFRESH_TOKEN = SLASH + "refresh_token";
+	
+	
+	public static final String FORM_API = "form";
+
+	public static final String FORM_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + FORM_API;
+
+	public static final String FORM_GET_MENU = SLASH + "form_get_menu";
+	
+	public static final String MENU_API = "menu";
+
+	public static final String MENU_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + FORM_API;
+
+	public static final String MENU_GET_ALL = SLASH + "menu_get_all";
+	
+	
+	
+	public static final String ROLE_API = "role";
+
+	public static final String ROLE_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + ROLE_API;
+
+	public static final String ROLE_SWITCH = SLASH + "role_switch/{roleId}";
 	
 	
 	// file api

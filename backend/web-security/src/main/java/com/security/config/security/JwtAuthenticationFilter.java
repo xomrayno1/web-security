@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.security.model.Authority;
 import com.security.model.JWTBody;
 import com.security.utils.ConstantManager;
 import com.security.utils.StringUtils;
@@ -45,10 +46,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 			if (tokenProvider.validateToken(token)) {
 				final JWTBody jwtBody = tokenProvider.extractJWTBodyFromJWT(token);
 				if (jwtBody != null) {
-					List<SimpleGrantedAuthority> authorities = jwtBody.getAuthorities()
-							.stream().map(SimpleGrantedAuthority::new).toList();
+//					List<SimpleGrantedAuthority> authorities = jwtBody.getAuthorities()
+//							.stream().map(Authority::new).toList();
 					final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-							jwtBody.getUsername(), null, authorities);
+							jwtBody.getPhone(), null, null);
 					authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 				}

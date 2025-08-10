@@ -1,14 +1,13 @@
 package com.security.model;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.security.entity.Staff;
+import com.security.model.enums.Status;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,13 +21,11 @@ import lombok.Data;
 public class CustomUserDetails implements UserDetails {
 	private static final long serialVersionUID = 1725582319574029188L;
 
-	private Staff staff;
+	private final Staff staff;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		final Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-		authorities.add(new SimpleGrantedAuthority("SUPPER_ADMIN"));
-		return authorities;
+		return Collections.emptySet();
 	}
 
 	@Override
@@ -48,7 +45,7 @@ public class CustomUserDetails implements UserDetails {
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return !(staff.getStatus() == Status.LOCKED);
 	}
 
 	@Override

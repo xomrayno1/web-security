@@ -10,9 +10,9 @@ import lombok.Setter;
 @Getter
 @Builder
 public class JWTBody {
-	private String username;
-	private Long userId;
+	private String phone;
 	private Long staffId;
-	private List<String> authorities;
-
+	private String email;
+	private List<Authority> authorities;
 }
+ 

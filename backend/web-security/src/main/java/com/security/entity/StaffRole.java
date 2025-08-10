@@ -32,7 +32,7 @@ public class StaffRole extends BaseEntity {
 	private Long staffRoleId;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "users_id")
+	@JoinColumn(name = "staff_id")
 	private Staff staff;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -45,8 +45,8 @@ public class StaffRole extends BaseEntity {
 	@Column(name = "to_date")
 	private LocalDateTime toDate;
 	
-	@Column(name = "is_active")
-	private boolean isActive;
+	@Column(name = "is_default")
+	private boolean isDefault;
 	
 
 }

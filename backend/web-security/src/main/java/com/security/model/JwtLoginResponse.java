@@ -1,6 +1,6 @@
 package com.security.model;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -14,10 +14,11 @@ import lombok.Setter;
 @Setter
 @Getter
 @Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class JwtLoginResponse {
 	private String accessToken;
 	private String refreshToken;
-	private Long staffId;
-	private List<String> authorities;
-
+	private StaffInfoLogin info;
 }
+
+ 

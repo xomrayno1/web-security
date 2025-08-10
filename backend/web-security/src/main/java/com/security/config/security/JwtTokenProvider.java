@@ -1,8 +1,6 @@
 package com.security.config.security;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -50,22 +48,31 @@ public class JwtTokenProvider {
 	            .compact();
 	}
 	
+	/**
+	 * Generate token with JWTBody
+	 * 
+	 * @param jwtBody
+	 * @return
+	 */
 	public String generateTokenWithBody(JWTBody jwtBody ) {
 		final Date now = new Date();
 		final Date expiryDate = new Date(now.getTime() + Long.parseLong(JWT_EXPIRATION));
 		 
 	    return Jwts.builder()
-	    		.setSubject(jwtBody.getUsername())
-	    		.claim("username", jwtBody.getUsername())
+	    		.setSubject(jwtBody.getPhone())
+	    		.claim("email", jwtBody.getEmail())
 	    		.claim("authorities", jwtBody.getAuthorities())
 	    		.claim("staffId", jwtBody.getStaffId())
-	    		.claim("userId", jwtBody.getUserId())
+	    		.claim("phone", jwtBody.getPhone())
 	    		.setIssuedAt(now)
 	            .setExpiration(expiryDate)
 	            .signWith(SignatureAlgorithm.HS512, JWT_SECRET)
 	            .compact();
 	}
 	
+	/**
+	 * Generate refresh token
+	 **/
 	public String generateRefreshToken(String username) {
 		final Date now = new Date();
 		final Date expiryDate = new Date(now.getTime() + Long.parseLong(JWT_REFRESH_EXPIRATION));
@@ -86,19 +93,18 @@ public class JwtTokenProvider {
     	final Claims claims = Jwts.parser().setSigningKey(JWT_SECRET)
     			.parseClaimsJws(token).getBody();
     	
-        List<String> authorities = (List<String>) claims.getOrDefault("authorities", Collections.EMPTY_LIST);
+       // List<String> authorities = (List<String>) claims.getOrDefault("authorities", Collections.EMPTY_LIST);
 
         Long staffId = Optional.ofNullable(claims.getOrDefault("staffId", null))
         		.map(item -> (item instanceof Number) ? ((Number) item).longValue() : null).orElse(null);
-        Long userId = Optional.ofNullable(claims.getOrDefault("userId", null))
-        		.map(item -> (item instanceof Number) ? ((Number) item).longValue() : null).orElse(null);
-        String username = (String) claims.getOrDefault("username", null);
+        String phone = (String) claims.getOrDefault("phone", null);
+        String email = (String) claims.getOrDefault("email", null);
         
 		return JWTBody.builder()
-        		.userId(userId)
+        		.phone(phone)
         		.staffId(staffId)
-        		.authorities(authorities)
-        		.username(username)
+        		.authorities(null)
+        		.email(email)
         		.build();
     }
     

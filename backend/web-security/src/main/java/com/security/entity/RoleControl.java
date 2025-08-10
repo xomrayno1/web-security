@@ -2,8 +2,11 @@ package com.security.entity;
 
 import java.time.LocalDateTime;
 
+import com.security.model.enums.RoleControlType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,7 +49,8 @@ public class RoleControl extends BaseEntity{
 	@Column(name = "to_date")
 	private LocalDateTime toDate;
 	
-	@Column(name = "is_active")
-	private boolean isActive;
+	@Column(name = "role_control_type")
+	@Enumerated(value = jakarta.persistence.EnumType.STRING)
+	private RoleControlType roleControlType;
 
 }

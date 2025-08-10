@@ -45,8 +45,6 @@ public class RoleForm  extends BaseEntity{
 	
 	@Column(name = "to_date")
 	private LocalDateTime toDate;
-	
-	@Column(name = "is_active")
-	private boolean isActive;
+	 
 
 }

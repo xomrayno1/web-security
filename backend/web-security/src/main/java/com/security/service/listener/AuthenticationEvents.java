@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * AuthenticationEvents class listens for authentication success and failure
+ * events and logs the relevant information.
+ * 
+ * @author tamnc
+ */
 @Slf4j
 @Component
 public class AuthenticationEvents {

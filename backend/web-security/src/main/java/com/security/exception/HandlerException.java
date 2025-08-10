@@ -22,6 +22,7 @@ public class HandlerException extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(Exception.class)
 	private ResponseEntity<ErrorDetail> handleCommonException(Exception exception, WebRequest request){
+		exception.printStackTrace();
 		ErrorDetail error = new ErrorDetail(APIStatus.ERR_SYSTEM_COMMON.getCode(), APIStatus.ERR_SYSTEM_COMMON.getMessage(), LocalDateTime.now());
 		return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -32,8 +32,7 @@ public class WebSecurityConfiguration {
 	private static final String[] WHITE_LIST_URL = { 
 			PathUtils.AUTH_API_V1 +"/**", 
 			"/unsecured/v1/unsecure-example", 
-			"/api/v1/account/health/**",
-            "/api/v1/account/customer/**",
+			"/api/v1/auth/health/**",
             "/schedule/**",
 			PathUtils.FILE_API_V1 + "/**",        
 			PathUtils.RATING_API_V1 + "/**"

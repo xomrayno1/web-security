@@ -4,6 +4,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.security.entity.Staff;
 import com.security.model.CustomUserDetails;
@@ -15,14 +16,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService{
 	
-	private final StaffRepository usersRepository;
-
+	private final StaffRepository staffRepository;
+	
 	@Override
+	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		final Staff user = usersRepository.findByPhone(username)
+		final Staff staff = staffRepository.findByPhone(username)
 				.orElseThrow(() -> new UsernameNotFoundException(username));
-
-		return new CustomUserDetails(user);
+		return new CustomUserDetails(staff);
 	}
 
 }
