@@ -1,19 +1,13 @@
 package com.security.config.security;
 
 import java.io.IOException;
-import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.security.model.Authority;
 import com.security.model.JWTBody;
+import com.security.model.security.PlainAuthentication;
 import com.security.utils.ConstantManager;
 import com.security.utils.StringUtils;
 
@@ -22,35 +16,34 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	private final JwtTokenProvider tokenProvider;
-
-
-	private static final Logger log = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
-
+	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-		final String bearerToken = request.getHeader(ConstantManager.AUTHORIZATION);
+		log.info("[JwtAuthenticationFilter] - request URI: {}", request.getRequestURI());
 		
+		final String bearerToken = request.getHeader(ConstantManager.AUTHORIZATION);
 		if(StringUtils.isNullOrEmpty(bearerToken) || !isTokenValid(bearerToken)) {
 			filterChain.doFilter(request, response);
+			log.error("[JwtAuthenticationFilter] - JWT Token is missing or invalid - request URI: {}", request.getRequestURI());
 			return;
 		}
+		
 		try {
 			String token = bearerToken.substring(7);
 			if (tokenProvider.validateToken(token)) {
 				final JWTBody jwtBody = tokenProvider.extractJWTBodyFromJWT(token);
 				if (jwtBody != null) {
-//					List<SimpleGrantedAuthority> authorities = jwtBody.getAuthorities()
-//							.stream().map(Authority::new).toList();
-					final UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-							jwtBody.getPhone(), null, null);
-					authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+					final PlainAuthentication authentication = new PlainAuthentication(jwtBody.getPhone(), jwtBody.getEmail(), jwtBody.getAuthorities());
+					authentication.setAuthenticated(true);
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 				}
 			}

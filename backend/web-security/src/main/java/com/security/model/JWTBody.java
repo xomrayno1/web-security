@@ -1,5 +1,6 @@
 package com.security.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import lombok.Builder;
@@ -13,6 +14,6 @@ public class JWTBody {
 	private String phone;
 	private Long staffId;
 	private String email;
-	private List<Authority> authorities;
+	private List<Authority> authorities = Collections.emptyList();
 }
  

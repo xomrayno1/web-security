@@ -2,6 +2,7 @@ package com.security.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -19,6 +20,7 @@ import lombok.RequiredArgsConstructor;
  * web security config
  * @author tamnc
  */
+@EnableMethodSecurity
 @EnableWebSecurity
 @Configuration
 @RequiredArgsConstructor
@@ -32,10 +34,7 @@ public class WebSecurityConfiguration {
 	private static final String[] WHITE_LIST_URL = { 
 			PathUtils.AUTH_API_V1 +"/**", 
 			"/unsecured/v1/unsecure-example", 
-			"/api/v1/auth/health/**",
-            "/schedule/**",
-			PathUtils.FILE_API_V1 + "/**",        
-			PathUtils.RATING_API_V1 + "/**"
+			"/api/v1/health/**",
 	};
 	
 	@Bean

@@ -54,7 +54,15 @@ public class AuthenticateServiceImpl extends BaseServiceImpl implements Authenti
 	private final PasswordEncoder passwordEncoder;
 	
 	/**
-	 * API login 
+	 * API login <br>
+	 * Authenticate user with phone and password, then generate JWT token <br>
+	 * Khi login vào hệ thống sẽ lấy role mặc định của nhân viên để load menu <br>
+	 * Login ko trả về danh sách menu, api /menu_get_all sẽ load menu <br> 
+	 * Trong Token sẽ parse danh sách quyền của nhân viên, các màn hình, các control, để khi gọi api sẽ kiểm tra quyền <br>
+	 * 
+	 * @param loginRequest contains phone and password
+	 * @return JwtLoginResponse contains access token and refresh token
+	 * @throws ValidateException if phone or password is invalid
 	 * @author tamnc
 	 * **/
 	@Override
@@ -62,7 +70,7 @@ public class AuthenticateServiceImpl extends BaseServiceImpl implements Authenti
 	public JwtLoginResponse authenticate(LoginRequest loginRequest) {
 		Authentication authentication =  authenticationManager
 				.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getPhone(), loginRequest.getPassword()));
-
+		//có cần k ???
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		final Staff staff = staffRepository.findByPhone(loginRequest.getPhone())
@@ -168,6 +176,13 @@ public class AuthenticateServiceImpl extends BaseServiceImpl implements Authenti
 		return new RefreshTokenResponse(accessToken, newRefreshToken);
 	}
 
+	/**
+	 * Tạo tài khoản nhân viên mới <br>
+	 * @param registerRequest contains phone, email and password
+	 * @return staffId
+	 * @throws ValidateException if phone already exists
+	 * @author tamnc
+	 * **/
 	@Override
 	public Long register(RegisterRequest registerRequest) {
 		boolean isExists = staffRepository.existsByPhone(registerRequest.getPhone());
@@ -186,6 +201,14 @@ public class AuthenticateServiceImpl extends BaseServiceImpl implements Authenti
 	}
 
 
+	/**
+	 * Chuyển đổi quyền của nhân viên sang quyền của role khác <br>
+	 * 
+	 * @param staffId
+	 * @param roleId
+	 * @return JwtLoginResponse contains access token
+	 * @author tamnc
+	 **/
 	@Override
 	public JwtLoginResponse roleSwitch(Long staffId, Long roleId) {
 		final List<Authority> authorities = this.getAuthoritiesByStaffIdAndRoleSelected(staffId, roleId);

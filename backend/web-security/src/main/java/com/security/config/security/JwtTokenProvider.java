@@ -1,12 +1,18 @@
 package com.security.config.security;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.security.model.Authority;
 import com.security.model.JWTBody;
+import com.security.utils.JsonUtils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -35,7 +41,7 @@ public class JwtTokenProvider {
 	
 	@Value("${jwt.refresh.expiration}")  
 	private String JWT_REFRESH_EXPIRATION;
-	  
+   
 	public String generateToken(String username) {
 		final Date now = new Date();
 		final Date expiryDate = new Date(now.getTime() + Long.parseLong(JWT_EXPIRATION));
@@ -92,18 +98,29 @@ public class JwtTokenProvider {
     public JWTBody extractJWTBodyFromJWT(String token) {
     	final Claims claims = Jwts.parser().setSigningKey(JWT_SECRET)
     			.parseClaimsJws(token).getBody();
-    	
-       // List<String> authorities = (List<String>) claims.getOrDefault("authorities", Collections.EMPTY_LIST);
+    	 
+    	Long staffId = Optional.ofNullable(claims.get("staffId"))
+    	        .filter(Number.class::isInstance)
+    	        .map(Number.class::cast)
+    	        .map(Number::longValue)
+    	        .orElse(null);
+    	String phone = (String) claims.get("phone");
+    	String email = (String) claims.get("email");
 
-        Long staffId = Optional.ofNullable(claims.getOrDefault("staffId", null))
-        		.map(item -> (item instanceof Number) ? ((Number) item).longValue() : null).orElse(null);
-        String phone = (String) claims.getOrDefault("phone", null);
-        String email = (String) claims.getOrDefault("email", null);
+        Object rawAuthorities = claims.getOrDefault("authorities", Collections.emptyList());
+        List<Authority> authorities;
+		try {
+			authorities = JsonUtils.map(JsonUtils.toJson(rawAuthorities), new TypeReference<List<Authority>>() { });
+		} catch (JsonProcessingException e) {
+			log.error("Error parsing authorities from JWT: {}", e.getMessage());
+			authorities = Collections.emptyList();
+		}
+ 
         
 		return JWTBody.builder()
         		.phone(phone)
         		.staffId(staffId)
-        		.authorities(null)
+        		.authorities(authorities)
         		.email(email)
         		.build();
     }

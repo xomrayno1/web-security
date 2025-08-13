@@ -27,7 +27,7 @@ public class RawConvert {
 		Authority.RoleControl roleControl = new Authority.RoleControl();
 		roleControl.setControleId(authorityLoginSpec.getControlId());
 		roleControl.setControlName(authorityLoginSpec.getControlName());
-		roleControl.setControlCode(authorityLoginSpec.getRoleCode());
+		roleControl.setControlCode(authorityLoginSpec.getControlCode());
 		if(authorityLoginSpec.getRoleControlType() != null) {
 			roleControl.setRoleControlType(RoleControlType.valueOf(authorityLoginSpec.getRoleControlType()));
 		}

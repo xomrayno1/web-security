@@ -3,6 +3,9 @@ package com.security.model;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
+
+import org.springframework.security.core.GrantedAuthority;
 
 import com.security.model.enums.RoleControlType;
 
@@ -17,7 +20,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Authority {
+public class Authority implements GrantedAuthority{
+	private static final long serialVersionUID = -7501224651398896183L;
+	
 	private Long roleId;
 	private String roleName;
 	private String roleCode;
@@ -33,7 +38,6 @@ public class Authority {
 	@AllArgsConstructor
 	@NoArgsConstructor
 	public static class FormInfo {
-		
 		private Long formId;
 		private String formName;
 		private String formCode;
@@ -81,6 +85,17 @@ public class Authority {
 	    public int hashCode() {
 	        return Objects.hash(this.controleId);
 	    }
+	    
+		public static Predicate<RoleControl> isValidControl(String controlCode) {
+			return roleControl -> roleControl.getRoleControlType() == RoleControlType.ENABLE 
+					&& roleControl.getControlCode().equals(controlCode);
+		}
+	    
+	}
+
+	@Override
+	public String getAuthority() {
+		return this.getRoleCode();
 	}
 
 }

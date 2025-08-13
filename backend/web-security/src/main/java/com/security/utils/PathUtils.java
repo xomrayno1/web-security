@@ -101,7 +101,6 @@ public class PathUtils {
 	
 
 	// sale api
-
 	public static final String SALE_ORDER_API = "sale_order";
 	
 	public static final String SALE_ORDER_EC_API = "sale_order_ec";
@@ -115,10 +114,6 @@ public class PathUtils {
 	public static final String SALE_ORDER_GET_BY_ID = SLASH + "sale_order_by_id/{id}";
 
 	public static final String SALE_ORDER_CREATE = SLASH + "sale_order_create";
-
-	public static final String SALE_ORDER_CREATE_V2 = SLASH + "sale_order_create_v2";
-	
-	public static final String SALE_ORDER_CREATE_MOCK = SLASH + "sale_order_create_mock";
 	
 	public static final String SALE_ORDER_CANCEL = SLASH + "cancel";
 	
@@ -129,6 +124,15 @@ public class PathUtils {
 	public static final String SALE_ORDER_CART = SLASH + "sale_order_cart";
 	
 	public static final String SALE_ORDER_BY_CUSTOMER_ID = SLASH + "sale_order_by_customer_id/{customerId}";
+	
+	// sale management
+	public static final String STAFF_API = "staff";
+
+	public static final String STAFF_API_V1 = SLASH + API + SLASH + VERSION_V1 + SLASH + STAFF_API;
+
+	public static final String STAFF_GET_BY_ID = SLASH + "staff_by_id/{id}";
+
+	public static final String STAFF_LIST = SLASH + "staff_list";
 	  
  
 	// account service

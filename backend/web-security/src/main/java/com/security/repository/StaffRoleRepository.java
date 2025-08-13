@@ -46,7 +46,7 @@ public interface StaffRoleRepository extends BaseRepository<StaffRole>{
 			+ "join role_form fr on fr.role_id = r.role_id and fr.status = 'ACTIVE'	"
 			+ "join form f on f.form_id = fr.form_id and f.status = 'ACTIVE' and f.form_type = :formType	"
 			+ "left join control c on c.form_id = f.form_id and c.status = 'ACTIVE'	"
-			+ "left join role_control rc on rc.control_id = c.control_id and r.role_id = r.role_id and rc.status = 'ACTIVE'	"
+			+ "left join role_control rc on rc.control_id = c.control_id and rc.role_id = r.role_id and rc.status = 'ACTIVE'	"
 			+ "where s.staff_id = :staffId ", nativeQuery = true)
 	List<AuthorityLoginSpec> findAuthorityLoginSpecsByStaffIdAndRoleIsDefaultAndFormType(
 			@Param("staffId") Long staffId, 
@@ -67,7 +67,7 @@ public interface StaffRoleRepository extends BaseRepository<StaffRole>{
 			+ "join role_form fr on fr.role_id = r.role_id and fr.status = 'ACTIVE'	"
 			+ "join form f on f.form_id = fr.form_id and f.status = 'ACTIVE' and f.form_type = :formType	"
 			+ "left join control c on c.form_id = f.form_id and c.status = 'ACTIVE'	"
-			+ "left join role_control rc on rc.control_id = c.control_id and r.role_id = r.role_id and rc.status = 'ACTIVE'	"
+			+ "left join role_control rc on rc.control_id = c.control_id and rc.role_id = r.role_id and rc.status = 'ACTIVE'	"
 			+ "where s.staff_id = :staffId ", nativeQuery = true)
 	List<AuthorityLoginSpec> findAuthorityLoginSpecsByStaffIdAndRoleIdAndFormType(
 			@Param("staffId") Long staffId, 
